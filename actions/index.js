@@ -21,14 +21,14 @@ export const fetchForecast = (city) => {
     if (responseForecast.status == 200) {
       let dataForecast =  await responseForecast.json()
       dispatch(updateForecast(dataForecast))
-      dispatch(toggleLoader(false))
       
     }else{
       dispatch(updateForecast(null))
-      dispatch(toggleLoader(false))
-      
     }
     
+
+
+    //Remplacement du background image par une photo de la ville recherché
     city  = city.replace(/\s/g, '-')
     let responseImage = await fetch('https://api.teleport.org/api/urban_areas/slug:'+city.toLowerCase()+'/images/')
     if (responseImage.status == 200) {

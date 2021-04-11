@@ -1,6 +1,8 @@
 import React from 'react';
 import ForecastChoseCity from './ForecastChoseCity';
 import { View ,StyleSheet } from 'react-native';
+
+
 const ForecastTitle = ()=> {
 
     return (

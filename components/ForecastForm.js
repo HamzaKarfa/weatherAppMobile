@@ -11,18 +11,19 @@ import { SafeAreaView,
 import Icon from 'react-native-vector-icons/Feather'; //Search icon with this link https://oblador.github.io/react-native-vector-icons/
 
 
-const stateForecastFormConnect = (state) => {
+const mapStateToProps = (state) => {
   return { stateProps: state};
 };
 
-const dispatchForecastFormConnect =(dispatch) =>{
+const dispatchForecastForm =(dispatch) =>{
   return {
       fetchForecastFunction: (villeName) => { dispatch(fetchForecast(villeName)) }
     }
  };
 
 
-const ForecastFormConnect = ({stateProps,fetchForecastFunction})=> {
+const ForecastFormConnect = ({fetchForecastFunction})=> {
+
     const [ville, setVille] = React.useState("");
     function sendAction(){
       if (!ville.length == 0) {
@@ -48,7 +49,6 @@ const ForecastFormConnect = ({stateProps,fetchForecastFunction})=> {
                         style={styles.input}
                         onChangeText={(ville)=> setVille(ville)}
                         value={ville}
-    
                           />
         </View>
       </SafeAreaView>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     }
   });
 
-const ForecastForm = connect(stateForecastFormConnect,dispatchForecastFormConnect)(ForecastFormConnect)
 
 
+const ForecastForm = connect(mapStateToProps,dispatchForecastForm)(ForecastFormConnect)
 export default ForecastForm;

@@ -4,6 +4,7 @@ import {
     StyleSheet,
     Text,
     View,
+    ActivityIndicator
   } from 'react-native';
 
 
@@ -12,7 +13,7 @@ import ForecastResult from './ForecastResult';
 import ForecastForm from './ForecastForm';
 import { connect } from 'react-redux';
 
-const state = (state) => {
+const mapStateToProps = (state) => {
   return { stateProps: state};
 };
 
@@ -20,27 +21,29 @@ const ForecastConnect = ({stateProps})=> {
 
     function displayContent(){
       if (!stateProps.loader && stateProps.forecast != undefined) {
-        return (<>
-          <ForecastTitle/>
-          <ForecastResult/>
-          </>)
+        return (
+          <>
+            <ForecastTitle/>
+            <ForecastResult/>
+          </> 
+        )
       } else {
         return (
-          <View style={styles.text} >
-              <Text  style={styles.text}>tdest</Text>
+          <View style={styles.content}>
+              <ActivityIndicator style={styles.content} size={100} color="#fff9"  />
           </View>
         )
       }
     }
 
-      return (
-        <View style={styles.container}>
-            {displayContent()}
-            <View style={styles.bottom}>
-              <ForecastForm/>
-            </View>
-        </View>
-      )
+    return (
+      <View style={styles.container}>
+          {displayContent()}
+          <View style={styles.bottom}>
+            <ForecastForm/>
+          </View>
+      </View>
+    )
 
 }
 
@@ -50,7 +53,11 @@ const ForecastConnect = ({stateProps})=> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height:100
+    height:'100%'
+  },
+  content:{
+    height:'100%',
+    width:'100%'
   },
   bottom: {
     position:'absolute',
@@ -67,5 +74,5 @@ const styles = StyleSheet.create({
     fontFamily: 'montserrat', 
   }
 });
-const Forecast = connect(state)(ForecastConnect)
+const Forecast = connect(mapStateToProps)(ForecastConnect)
 export default Forecast;

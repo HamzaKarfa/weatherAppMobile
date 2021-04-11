@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Text, StyleSheet } from "react-native";
 
 
-const state = (state) => {
+const mapStateToProps = (state) => {
   return { stateProps: state};
 };
 
@@ -34,5 +34,5 @@ const ForecastChoseCityConnect = ({stateProps})=> {
   });
 
 
-const ForecastChoseCity = connect(state)(ForecastChoseCityConnect)
+const ForecastChoseCity = connect(mapStateToProps)(ForecastChoseCityConnect)
 export default ForecastChoseCity;
